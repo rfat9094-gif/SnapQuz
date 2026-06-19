@@ -45,8 +45,8 @@ let gameState = {
 
 // بنك أسئلة محلي فوري وضخم يشتغل فوراً عشان تجرب بيه الأزرار والخانات
 const backupQuestions = [
-    { id: "b_1", category: "countries", question: "إلى أي دولة ينتمي هذا العلم؟", options: ["مصر", "سوريا", "العراق", "اليمن"], correctAnswer: "مصر", image: "https://flagcdn.com/w320/eg.png" },
-    { id: "b_2", category: "countries", question: "إلى أي دولة ينتمي هذا العلم؟", options: ["السعودية", "الكويت", "عمان", "قطر"], correctAnswer: "السعودية", image: "https://flagcdn.com/w320/sa.png" },
+    { id: "b_1", category: "countries", question: "إلى أي دولة ينتمي هذا العلم？", options: ["مصر", "سوريا", "العراق", "اليمن"], correctAnswer: "مصر", image: "https://flagcdn.com/w320/eg.png" },
+    { id: "b_2", category: "countries", question: "إلى أي دولة ينتمي هذا العلم？", options: ["السعودية", "الكويت", "عمان", "قطر"], correctAnswer: "السعودية", image: "https://flagcdn.com/w320/sa.png" },
     { id: "b_3", category: "cars", question: "ما هي شركة السيارات صاحبة هذا الشعار؟", options: ["مرسيدس بنز", "بي إم دبليو", "أودي", "تويوتا"], correctAnswer: "مرسيدس بنز", image: "https://www.carlogos.org/car-logos/mercedes-benz-logo.png" },
     { id: "b_4", category: "cars", question: "ما هي شركة السيارات صاحبة هذا الشعار؟", options: ["تويوتا", "هوندا", "نيسان", "مازدا"], correctAnswer: "تويوتا", image: "https://www.carlogos.org/car-logos/toyota-logo.png" },
     { id: "b_5", category: "monuments", question: "ما اسم هذا المعلم السياحي الشهير？", options: ["الأهرامات (مصر)", "برج إيفل", "تاج محل", "سور الصين"], correctAnswer: "الأهرامات (مصر)", image: "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=500" },
@@ -54,7 +54,9 @@ const backupQuestions = [
     { id: "b_7", category: "general", question: "ما هي عاصمة جمهورية مصر العربية؟", options: ["القاهرة", "الإسكندرية", "الجيزة", "المنيا"], correctAnswer: "القاهرة", image: null },
     { id: "b_8", category: "general", question: "كم عدد كواكب المجموعة الشمسية؟", options: ["8 كواكب", "9 كواكب", "7 كواكب", "6 كواكب"], correctAnswer: "8 كواكب", image: null }
 ];
-const githubRawUrl = "https://raw.githubusercontent.com/rfat9094-git/SnapQuiz/main/لعبه/questions.json";const startScreen = document.getElementById('start-screen');
+
+const githubRawUrl = "https://raw.githubusercontent.com/rfat9094-git/SnapQuiz/main/لعبه/questions.json";
+const startScreen = document.getElementById('start-screen');
 const triviaScreen = document.getElementById('trivia-screen');
 const resultScreen = document.getElementById('result-screen');
 const themeToggle = document.getElementById('theme-toggle');
@@ -91,7 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function setupClickListeners() {
     document.querySelectorAll('.category-card').forEach(card => {
         card.addEventListener('click', () => {
-            // التعديل: الحصول على الـ data-cat لتطابق الـ HTML الخاص بك تماماً
             const selectedCategory = card.dataset.cat;
             startSpecificCategory(selectedCategory);
         });
@@ -131,9 +132,6 @@ function setupBackupQuestions() {
 }
 
 async function generateDynamicQuestions() {
-    // 🔗 حط رابط الـ Raw الخاص بملف الـ JSON هنا بعد رفعه على جيت هاب
-    const githubRawUrl = "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/questions.json";
-
     if(githubRawUrl.includes("YOUR_USERNAME")) return;
 
     try {
@@ -163,7 +161,7 @@ async function generateDynamicQuestions() {
             });
         }
 
-        if (generatedQuestions.length > 0) {
+        if (generatedQuestions.length > 10) {
             gameState.allBankQuestions = generatedQuestions;
             console.log("تم تحديث الأسئلة الحية من جيت هاب بنجاح! 🚀");
         }
@@ -207,7 +205,9 @@ function startSpecificCategory(category) {
     }
 
     let shuffled = shuffleArray([...categoryPool]);
-    gameState.activeQuestions = shuffled.slice(0, 4); 
+    
+    // 🎯 التحديث الأول: تغيير عدد الأسئلة لتصبح 10 أسئلة بدلاً من 4 في الجولة
+    gameState.activeQuestions = shuffled.slice(0, 10); 
     
     gameState.score = 0;
     gameState.correctAnswersCount = 0;
@@ -308,29 +308,38 @@ function handleTimeOut() {
 
 function resetTimer() { clearInterval(gameState.timer); }
 
+// 🎯 التحديث الثاني: استدعاء فاصل إعلاني تلقائي عند انتهاء الأسئلة وقبل شاشة النتائج
 function endGameSession() {
-    switchScreen(resultScreen);
-    playSound('victory');
+    console.log("جاري إظهار الإعلان البيني تلقائياً... 📺");
     
-    const pName = playerNameInput.value.trim() || 'لاعب مجهول';
-    const pCountry = playerCountryInput.value;
+    // تنبيه تجريبي يمثل وقت الإعلان (يمكنك استبداله بكود شبكة الإعلانات الفعلي لاحقاً)
+    alert("📺 فاصل إعلاني سريع... سيتم عرض النتيجة فوراً بعد الإعلان!");
 
-    if (gameState.score > gameState.highScore) {
-        gameState.highScore = gameState.score;
-        localStorage.setItem('quiz_high_score', gameState.highScore);
-    }
-    
-    localStorage.setItem('saved_player_name', pName);
-    localStorage.setItem('saved_player_country', pCountry);
+    // ⏳ انتظار ثانيتين (وقت عرض الإعلان التخيلي) ثم الانتقال التلقائي للنتائج وحفظ النقاط
+    setTimeout(() => {
+        switchScreen(resultScreen);
+        playSound('victory');
+        
+        const pName = playerNameInput.value.trim() || 'لاعب مجهول';
+        const pCountry = playerCountryInput.value;
 
-    document.getElementById('res-score').innerText = gameState.score;
-    document.getElementById('res-correct').innerText = gameState.correctAnswersCount;
-    document.getElementById('res-wrong').innerText = gameState.wrongAnswersCount;
-    updateMainMenuStats();
+        if (gameState.score > gameState.highScore) {
+            gameState.highScore = gameState.score;
+            localStorage.setItem('quiz_high_score', gameState.highScore);
+        }
+        
+        localStorage.setItem('saved_player_name', pName);
+        localStorage.setItem('saved_player_country', pCountry);
 
-    if (db) {
-        saveScoreToOnlineDatabase(pName, pCountry, gameState.score);
-    }
+        document.getElementById('res-score').innerText = gameState.score;
+        document.getElementById('res-correct').innerText = gameState.correctAnswersCount;
+        document.getElementById('res-wrong').innerText = gameState.wrongAnswersCount;
+        updateMainMenuStats();
+
+        if (db) {
+            saveScoreToOnlineDatabase(pName, pCountry, gameState.score);
+        }
+    }, 2000); 
 }
 
 function saveScoreToOnlineDatabase(name, country, score) {
@@ -447,8 +456,9 @@ function playSound(type) {
         } else if (type === 'victory') {
             osc.frequency.setValueAtTime(523, ctx.currentTime);
             osc.frequency.setValueAtTime(784, ctx.currentTime + 0.15);
-            gain.gain.setValueAtTime(0.1, ctx.currentTime);
+            gain.gain.setValueAtTime(0.1; ctx.currentTime);
             osc.start(); osc.stop(ctx.currentTime + 0.3);
         }
     } catch (e) { console.log("Audio API Blocked"); }
-}
+  }
+      
