@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="style.css">
+    <title>SnapQuiz</title>
+    <script type="module" src="script.js"></script>
+</head>
+<body>
+
+    <div class="game-container">
+        <div class="top-controls">
+            <button class="icon-btn" id="theme-toggle">🌙</button>
+            <button class="icon-btn" id="view-leaderboard-btn">🏆</button>
+            <button class="icon-btn" id="sound-toggle">🔊</button>
+        </div>
+
+        <div id="start-screen" class="screen active">
+            <h1 class="game-title">🧠 تحدي المعرفة الذكي</h1>
+            <p class="game-subtitle">المستوى الحالي: -- | أعلى نتيجة: --</p>
+
+            <div class="inputs-row">
+                <input type="text" id="player-name-input" placeholder="اكتب اسمك هنا..." maxlength="12">
+                <select id="player-country-input">
+                    <option value="مصر">مصر 🇪🇬</option>
+                    <option value="السعودية">السعودية 🇸🇦</option>
+                    <option value="الإمارات">الإمارات 🇦🇪</option>
+                    <option value="الأردن">الأردن 🇯🇴</option>
+                </select>
+            </div>
+
+            <div class="categories-grid">
+                <div class="category-card" data-cat="countries">
+                    <span class="category-icon">🌍</span>
+                    <span class="category-name">أعلام الدول</span>
+                </div>
+                <div class="category-card" data-cat="cars">
+                    <span class="category-icon">🚗</span>
+                    <span class="category-name">شعارات السيارات</span>
+                </div>
+                <div class="category-card" data-cat="monuments">
+                    <span class="category-icon">🏛️</span>
+                    <span class="category-name">معالم أثرية</span>
+                </div>
+                <div class="category-card" data-cat="general">
+                    <span class="category-icon">💡</span>
+                    <span class="category-name">معلومات عامة</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="trivia-screen" class="screen">
+            <div class="hud-bar">
+                <span id="hud-score">⭐ 0</span>
+                <span class="timer-circle" id="timer-text">15</span>
+            </div>
+
+            <div class="progress-container">
+                <div id="progress-bar"></div>
+            </div>
+
+            <div class="question-box">
+                <p id="question-category">🌍 أعلام الدول</p>
+                <h2 id="question-text">جاري تحميل السؤال...</h2>
+            </div>
+
+            <div id="question-image-container" class="image-frame hidden">
+                <img id="question-image" src="" alt="سؤال بصورة">
+            </div>
+
+            <div class="answers-container" id="answers-grid"></div>
+        </div>
+
+        <div id="result-screen" class="screen">
+            <h1 class="game-title">🎉 انتهى التحدي!</h1>
+            
+            <div class="stats-list">
+                <div class="stat-item">
+                    <span>النقاط التي جمعتها:</span>
+                    <span id="res-score" style="font-weight:bold; color:var(--accent-purple);">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>الإجابات الصحيحة:</span>
+                    <span id="res-correct" style="color:#10b981;">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>الإجابات الخاطئة:</span>
+                    <span id="res-wrong" style="color:#ef4444;">0</span>
+                </div>
+            </div>
+
+            <button class="action-btn" id="go-home-btn">العودة للرئيسية 🏠</button>
+        </div>
+    </div>
+
+    <div id="leaderboard-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <h2 class="game-title" style="font-size:20px; margin-bottom:15px;">🏆 لوحة الصدارة أونلاين</h2>
+            <div class="modal-tabs">
+                <button id="tab-players" class="tab-btn active">أفضل اللاعبين</button>
+                <button id="tab-countries" class="tab-btn">ترتيب الدول</button>
+            </div>
+            <div class="leaderboard-rows" id="leaderboard-list"></div>
+            <button class="action-btn" id="close-leaderboard-btn" style="background:#ef4444; margin-top:5px; padding:8px;">إغلاق</button>
+        </div>
+    </div>
+
+    <div class="admob-banner-space">
+        <span class="ad-placeholder-text">AdMob Banner Space</span>
+    </div>
+
+</body>
+</html>
