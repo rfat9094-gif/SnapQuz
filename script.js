@@ -45,11 +45,11 @@ let gameState = {
 
 // بنك أسئلة محلي فوري وضخم يشتغل فوراً عشان تجرب بيه الأزرار والخانات
 const backupQuestions = [
-    { id: "b_1", category: "countries", question: "إلى أي دولة ينتمي هذا العلم？", options: ["مصر", "سوريا", "العراق", "اليمن"], correctAnswer: "مصر", image: "https://flagcdn.com/w320/eg.png" },
-    { id: "b_2", category: "countries", question: "إلى أي دولة ينتمي هذا العلم？", options: ["السعودية", "الكويت", "عمان", "قطر"], correctAnswer: "السعودية", image: "https://flagcdn.com/w320/sa.png" },
+    { id: "b_1", category: "countries", question: "إلى أي دولة ينتمي هذا العلم؟", options: ["مصر", "سوريا", "العراق", "اليمن"], correctAnswer: "مصر", image: "https://flagcdn.com/w320/eg.png" },
+    { id: "b_2", category: "countries", question: "إلى أي دولة ينتمي هذا العلم؟", options: ["السعودية", "الكويت", "عمان", "قطر"], correctAnswer: "السعودية", image: "https://flagcdn.com/w320/sa.png" },
     { id: "b_3", category: "cars", question: "ما هي شركة السيارات صاحبة هذا الشعار؟", options: ["مرسيدس بنز", "بي إم دبليو", "أودي", "تويوتا"], correctAnswer: "مرسيدس بنز", image: "https://www.carlogos.org/car-logos/mercedes-benz-logo.png" },
     { id: "b_4", category: "cars", question: "ما هي شركة السيارات صاحبة هذا الشعار؟", options: ["تويوتا", "هوندا", "نيسان", "مازدا"], correctAnswer: "تويوتا", image: "https://www.carlogos.org/car-logos/toyota-logo.png" },
-    { id: "b_5", category: "monuments", question: "ما اسم هذا المعلم السياحي الشهير？", options: ["الأهرامات (مصر)", "برج إيفل", "تاج محل", "سور الصين"], correctAnswer: "الأهرامات (مصر)", image: "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=500" },
+    { id: "b_5", category: "monuments", question: "ما اسم هذا المعلم السياحي الشهير؟", options: ["الأهرامات (مصر)", "برج إيفل", "تاج محل", "سور الصين"], correctAnswer: "الأهرامات (مصر)", image: "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=500" },
     { id: "b_6", category: "monuments", question: "ما اسم هذا المعلم السياحي الشهير؟", options: ["برج إيفل (فرنسا)", "برج بيزا المائل", "تمثال الحرية", "ساعة بيج بن"], correctAnswer: "برج إيفل (فرنسا)", image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=500" },
     { id: "b_7", category: "general", question: "ما هي عاصمة جمهورية مصر العربية؟", options: ["القاهرة", "الإسكندرية", "الجيزة", "المنيا"], correctAnswer: "القاهرة", image: null },
     { id: "b_8", category: "general", question: "كم عدد كواكب المجموعة الشمسية؟", options: ["8 كواكب", "9 كواكب", "7 كواكب", "6 كواكب"], correctAnswer: "8 كواكب", image: null }
@@ -161,7 +161,7 @@ async function generateDynamicQuestions() {
             });
         }
 
-        if (generatedQuestions.length > 10) {
+        if (generatedQuestions.length > 0) {
             gameState.allBankQuestions = generatedQuestions;
             console.log("تم تحديث الأسئلة الحية من جيت هاب بنجاح! 🚀");
         }
@@ -394,7 +394,7 @@ function renderLeaderboard() {
             let countryFlags = { "مصر": "🇪🇬", "السعودية": "🇸🇦", "الإمارات": "🇦🇪", "الأردن": "🇯🇴" };
             sortedCountries.forEach((c, idx) => {
                 let flag = countryFlags[c.country] || "🌍";
-                leaderboardList.innerHTML += `<div class="leaderboard-item"><span>${idx + 1}. ${c.country} ${flag}</span><span>⭐ ${c.score}</span></div>`;
+                leaderboardList.innerHTML += `<div class="leaderboard-item"><span>idx + 1}. ${c.country} ${flag}</span><span>⭐ ${c.score}</span></div>`;
             });
         }
     }).catch(err => {
@@ -456,9 +456,9 @@ function playSound(type) {
         } else if (type === 'victory') {
             osc.frequency.setValueAtTime(523, ctx.currentTime);
             osc.frequency.setValueAtTime(784, ctx.currentTime + 0.15);
-            gain.gain.setValueAtTime(0.1; ctx.currentTime);
+            gain.gain.setValueAtTime(0.1, ctx.currentTime);
             osc.start(); osc.stop(ctx.currentTime + 0.3);
         }
     } catch (e) { console.log("Audio API Blocked"); }
   }
-      
+  
