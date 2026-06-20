@@ -447,62 +447,68 @@ function renderLeaderboard() {
     });
 }
 
-function switchScreen(targetScreen) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    targetScreen.classList.add('active');
-}
-
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+// 🎯 الدالة المحمية بالكامل لمنع خطأ جلب البيانات عندما تكون القاعدة فارغة
+function renderLeaderboard() {
+    leaderboardList.innerHTML = '<div style="text-align:center; padding:10px; font-size:12px;">جاري تحميل الترتيب...⏳</div>';
+    if (!db) {
+        leaderboardList.innerHTML = '<div class="leaderboard-item" style="justify-content:center;">لوحة الصدارة بحاجة لربط الفايربيز 🌍</div>';
+        return;
     }
-    return array;
-}
-
-function getCategoryArabicName(cat) {
-    const names = { countries: "🌍 أعلام الدول", cars: "🚗 شعارات السيارات", monuments: "🏛️ معالم أثرية", general: "💡 معلومات عامة" };
-    return names[cat] || "عام";
-}
-
-function toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', newTheme);
-    themeToggle.innerText = newTheme === 'dark' ? '🌙' : '☀️';
-    localStorage.setItem('game_theme', newTheme);
-}
-
-function toggleSound() {
-    gameState.isSoundEnabled = !gameState.isSoundEnabled;
-    soundToggle.innerText = gameState.isSoundEnabled ? "🔊" : "🔇";
-    localStorage.setItem('game_sound', gameState.isSoundEnabled);
-}
-
-function playSound(type) {
-    if (!gameState.isSoundEnabled) return;
-    try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (!AudioContext) return;
-        const ctx = new AudioContext();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.connect(gain); gain.connect(ctx.destination);
-        if (type === 'correct') {
-            osc.frequency.setValueAtTime(523.25, ctx.currentTime);
-            osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1);
-            gain.gain.setValueAtTime(0.1, ctx.currentTime);
-            osc.start(); osc.stop(ctx.currentTime + 0.2);
-        } else if (type === 'wrong') {
-            osc.frequency.setValueAtTime(196, ctx.currentTime);
-            osc.frequency.setValueAtTime(146, ctx.currentTime + 0.1);
-            gain.gain.setValueAtTime(0.15, ctx.currentTime);
-            osc.start(); osc.stop(ctx.currentTime + 0.25);
-        } else if (type === 'victory') {
-            osc.frequency.setValueAtTime(523, ctx.currentTime);
-            osc.frequency.setValueAtTime(784, ctx.currentTime + 0.15);
-            gain.gain.setValueAtTime(0.1, ctx.currentTime);
-            osc.start(); osc.stop(ctx.currentTime + 0.3);
+    
+    // إشارة مباشرة لـ 'leaderboard'
+    const leaderboardRef = ref(db, 'leaderboard');
+    
+    // نستخدم get العادية أولاً لضمان عدم حدوث كراش الاستعلام على قاعدة فارغة
+    get(leaderboardRef).then((snapshot) => {
+        let players = [];
+        
+        // إذا كانت القاعدة تحتوي على بيانات فعلاً، نقوم بمعالجتها وترتيبها
+        if (snapshot.exists()) {
+            snapshot.forEach((childSnapshot) => { 
+                players.push(childSnapshot.val()); 
+            });
+            // ترتيب من الأعلى سكور للأقل
+            players.sort((a, b) => b.score - a.score);
+            // أخذ أول 10 لاعبين فقط
+            players = players.slice(0, 10);
         }
-    } catch (e) { console.log("Audio API Blocked"); }
+
+        if (currentTab === 'players') {
+            leaderboardList.innerHTML = '';
+            // إذا كانت المصفوفة فارغة (أول مرة تفتح اللعبة والقاعدة بيضاء)
+            if(players.length === 0) {
+                leaderboardList.innerHTML = '<div class="leaderboard-item" style="justify-content:center; font-size:13px; color:#a2a0ff;">لا توجد نتائج بعد! كن أول المنافسين واكسر الرقم القياسي 🏆</div>';
+                return;
+            }
+            players.forEach((p, idx) => {
+                let medal = idx === 0 ? "🥇 " : idx === 1 ? "🥈 " : idx === 2 ? "🥉 " : `${idx + 1}. `;
+                let countryFlags = { "مصر": "🇪🇬", "السعودية": "🇸🇦", "الإمارات": "🇦🇪", "الأردن": "🇯🇴" };
+                let flag = countryFlags[p.country] || "🌍";
+                
+                leaderboardList.innerHTML += `<div class="leaderboard-item"><span>${medal} ${p.name} ${flag}</span><span>⭐ ${p.score}</span></div>`;
+            });
+        } else {
+            leaderboardList.innerHTML = '';
+            if(players.length === 0) {
+                leaderboardList.innerHTML = '<div class="leaderboard-item" style="justify-content:center; font-size:13px; color:#a2a0ff;">لا توجد دول في الصدارة بعد!</div>';
+                return;
+            }
+            let countryScores = {};
+            players.forEach(p => { countryScores[p.country] = (countryScores[p.country] || 0) + p.score; });
+            
+            let sortedCountries = Object.keys(countryScores).map(key => {
+                return { country: key, score: countryScores[key] };
+            }).sort((a,b) => b.score - a.score);
+
+            let countryFlags = { "مصر": "🇪🇬", "السعودية": "🇸🇦", "الإمارات": "🇦🇪", "الأردن": "🇯🇴" };
+            sortedCountries.forEach((c, idx) => {
+                let flag = countryFlags[c.country] || "🌍";
+                leaderboardList.innerHTML += `<div class="leaderboard-item"><span>${idx + 1}. ${c.country} ${flag}</span><span>⭐ ${c.score}</span></div>`;
+            });
+        }
+    }).catch(err => {
+        console.error("Firebase Error Details:", err);
+        // في حالة وجود أي خطأ آخر، سيعرض التنبيه النظيف بدلاً من توقف اللعبة
+        leaderboardList.innerHTML = '<div class="leaderboard-item" style="justify-content:center; color:#ff7676;">لوحة الصدارة فارغة حالياً بانتظار أول سكور! 🎮</div>';
+    });
 }
