@@ -49,9 +49,9 @@ const backupQuestions = [
     { "id": "c_1", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "مصر", "options": ["مصر", "سوريا", "العراق", "اليمن"], "image": "https://flagcdn.com/w320/eg.png" },
     { "id": "c_2", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم？", "correctAnswer": "السعودية", "options": ["السعودية", "الكويت", "عمان", "قطر"], "image": "https://flagcdn.com/w320/sa.png" },
     { "id": "c_3", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "الإمارات", "options": ["الإمارات", "الأردن", "فلسطين", "السودان"], "image": "https://flagcdn.com/w320/ae.png" },
-    { "id": "c_4", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "الأردن", "options": ["الأردن", "الكويت", "البحرين", "تونس"], "image": "https://flagcdn.com/w320/jo.png" },
+    { "id": "c_4", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم？", "correctAnswer": "الأردن", "options": ["الأردن", "الكويت", "البحرين", "تونس"], "image": "https://flagcdn.com/w320/jo.png" },
     { "id": "c_5", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "اليابان", "options": ["اليابان", "الصين", "كوريا الجنوبية", "فيتنام"], "image": "https://flagcdn.com/w320/jp.png" },
-    { "id": "c_6", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم？", "correctAnswer": "فرنسا", "options": ["فرنسا", "إيطاليا", "روسيا", "هولندا"], "image": "https://flagcdn.com/w320/fr.png" },
+    { "id": "c_6", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "فرنسا", "options": ["فرنسا", "إيطاليا", "روسيا", "هولندا"], "image": "https://flagcdn.com/w320/fr.png" },
     { "id": "c_7", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "البرازيل", "options": ["البرازيل", "الأرجنتين", "كولومبيا", "المكسيك"], "image": "https://flagcdn.com/w320/br.png" },
     { "id": "c_8", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "المغرب", "options": ["المغرب", "الجزائر", "تونس", "ليبيا"], "image": "https://flagcdn.com/w320/ma.png" },
     { "id": "c_9", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "كندا", "options": ["كندا", "أمريكا", "أستراليا", "بريطانيا"], "image": "https://flagcdn.com/w320/ca.png" },
@@ -77,7 +77,7 @@ const backupQuestions = [
     { "id": "m_2", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "برج إيفل (فرنسا)", "options": ["برج إيفل (فرنسا)", "برج بيزا المائل", "تمثال الحرية", "ساعة بيج بن"], "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=500" },
     { "id": "m_3", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "تاج محل (الهند)", "options": ["تاج محل (الهند)", "البيت الأبيض", "مسرح الكولوسيوم", "البتراء (الأردن)"], "image": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=500" },
     { "id": "m_4", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "تمثال الحرية (أمريكا)", "options": ["تمثال الحرية (أمريكا)", "تمثال المسيح الفادي", "برج خليفة", "برج إيفل"], "image": "https://images.unsplash.com/photo-1605130284535-11dd9ebc5277?w=500" },
-    { "id": "m_5", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير？", "correctAnswer": "الكولوسيوم (إيطاليا)", "options": ["الكولوسيوم (إيطاليا)", "الأهرامات", "البتراء", "سور الصين العظيم"], "image": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=500" },
+    { "id": "m_5", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "الكولوسيوم (إيطاليا)", "options": ["الكولوسيوم (إيطاليا)", "الأهرامات", "البتراء", "سور الصين العظيم"], "image": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=500" },
     { "id": "m_6", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "برج خليفة (الإمارات)", "options": ["برج خليفة (الإمارات)", "برج إيفل", "ساعة بيج بن", "تاج محل"], "image": "https://images.unsplash.com/photo-1597655601841-214a4cfe8b2c?w=500" },
     { "id": "m_7", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "برج بيزا المائل (إيطاليا)", "options": ["برج بيزا المائل (إيطاليا)", "برج إيفل", "ساعة بيج بن", "البيت الأبيض"], "image": "https://images.unsplash.com/photo-1543872084-c7bd3822856f?w=500" },
     { "id": "m_8", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "سور الصين العظيم (الصين)", "options": ["سور الصين العظيم (الصين)", "تاج محل", "الكولوسيوم", "الأهرامات"], "image": "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=500" },
@@ -85,7 +85,7 @@ const backupQuestions = [
     // معلومات عامة
     { "id": "g_1", "category": "general", "question": "كم عدد كواكب المجموعة الشمسية؟", "correctAnswer": "8 كواكب", "options": ["8 كواكب", "9 كواكب", "7 كواكب", "6 كواكب"], "image": null },
     { "id": "g_2", "category": "general", "question": "ما هو أكبر المحيطات على كوكب الأرض؟", "correctAnswer": "المحيط الهادئ", "options": ["المحيط الهادئ", "المحيط الأطلسي", "المحيط الهندي", "المحيط المتجمد"], "image": null },
-    { "id": "g_3", "category": "general", "question": "من هو العالم الذي اكتشف جاذبية الأرض؟", "correctAnswer": "إسحاق نيوتن", "options": ["إسحاق نيوتن", "ألبيرت أينشتاين", "غاليليو غاليلي", "توماس إديسون"], "image": null },
+    { "id": "g_3", "category": "general", "question": "من هو العالم الذي اكتشف جاذبية الأرض？", "correctAnswer": "إسحاق نيوتن", "options": ["إسحاق نيوتن", "ألبيرت أينشتاين", "غاليليو غاليلي", "توماس إديسون"], "image": null },
     { "id": "g_4", "category": "general", "question": "ما هو أطول نهر في العالم؟", "correctAnswer": "نهر النيل", "options": ["نهر النيل", "نهر الأمازون", "نهر الميسيسيبي", "نهر الدانوب"], "image": null },
     { "id": "g_5", "category": "general", "question": "ما هو الغاز الأساسي الذي يتنفسه الإنسان؟", "correctAnswer": "الأكسجين", "options": ["الأكسجين", "النيتروجين", "ثاني أكسيد الكربون", "الهيدروجين"], "image": null },
     { "id": "g_6", "category": "general", "question": "ما هي عاصمة جمهورية مصر العربية؟", "correctAnswer": "القاهرة", "options": ["القاهرة", "الإسكندرية", "الجيزة", "المنيا"], "image": null },
@@ -203,7 +203,7 @@ async function generateDynamicQuestions() {
             });
         }
 
-        if (generatedQuestions.length > 6) {
+        if (generatedQuestions.length > 0) {
             gameState.allBankQuestions = generatedQuestions;
             console.log("تم تحديث الأسئلة الحية من جيت هاب بنجاح! 🚀");
         }
@@ -392,7 +392,7 @@ function saveScoreToOnlineDatabase(name, country, score) {
     });
 }
 
-// 🎯 الدالة المحدثة كلياً لضمان الجلب الآمن بدون كراش وبدون قيود الـ Auth القديمة
+// 🎯 الدالة المحدثة كلياً والمؤمنة ضد الخطأ عند جلب قاعدة بيانات فارغة (أول سكور)
 function renderLeaderboard() {
     leaderboardList.innerHTML = '<div style="text-align:center; padding:10px; font-size:12px;">جاري تحميل الترتيب...⏳</div>';
     if (!db) {
@@ -400,84 +400,23 @@ function renderLeaderboard() {
         return;
     }
     
-    const leaderboardQuery = query(ref(db, 'leaderboard'), orderByChild('score'), limitToLast(10));
-    get(leaderboardQuery).then((snapshot) => {
-        let players = [];
-        
-        if (snapshot.exists()) {
-            snapshot.forEach((childSnapshot) => { players.push(childSnapshot.val()); });
-            players.reverse();
-        }
-
-        if (currentTab === 'players') {
-            leaderboardList.innerHTML = '';
-            if(players.length === 0) {
-                leaderboardList.innerHTML = '<div class="leaderboard-item" style="justify-content:center;">لا توجد نتائج بعد! كن أول المنافسين 🏆</div>';
-                return;
-            }
-            players.forEach((p, idx) => {
-                let medal = idx === 0 ? "🥇 " : idx === 1 ? "🥈 " : idx === 2 ? "🥉 " : `${idx + 1}. `;
-                let countryFlags = { "مصر": "🇪🇬", "السعودية": "🇸🇦", "الإمارات": "🇦🇪", "الأردن": "🇯🇴" };
-                let flag = countryFlags[p.country] || "🌍";
-                
-                leaderboardList.innerHTML += `<div class="leaderboard-item"><span>${medal} ${p.name} ${flag}</span><span>⭐ ${p.score}</span></div>`;
-            });
-        } else {
-            leaderboardList.innerHTML = '';
-            if(players.length === 0) {
-                leaderboardList.innerHTML = '<div class="leaderboard-item" style="justify-content:center;">لا توجد دول في الصدارة بعد!</div>';
-                return;
-            }
-            let countryScores = {};
-            players.forEach(p => { countryScores[p.country] = (countryScores[p.country] || 0) + p.score; });
-            
-            let sortedCountries = Object.keys(countryScores).map(key => {
-                return { country: key, score: countryScores[key] };
-            }).sort((a,b) => b.score - a.score);
-
-            let countryFlags = { "مصر": "🇪🇬", "السعودية": "🇸🇦", "الإمارات": "🇦🇪", "الأردن": "🇯🇴" };
-            sortedCountries.forEach((c, idx) => {
-                let flag = countryFlags[c.country] || "🌍";
-                leaderboardList.innerHTML += `<div class="leaderboard-item"><span>${idx + 1}. ${c.country} ${flag}</span><span>⭐ ${c.score}</span></div>`;
-            });
-        }
-    }).catch(err => {
-        console.error(err);
-        leaderboardList.innerHTML = '<div class="leaderboard-item" style="justify-content:center;">خطأ في جلب البيانات، تأكد من حفظ الـ Rules.</div>';
-    });
-}
-
-// 🎯 الدالة المحمية بالكامل لمنع خطأ جلب البيانات عندما تكون القاعدة فارغة
-function renderLeaderboard() {
-    leaderboardList.innerHTML = '<div style="text-align:center; padding:10px; font-size:12px;">جاري تحميل الترتيب...⏳</div>';
-    if (!db) {
-        leaderboardList.innerHTML = '<div class="leaderboard-item" style="justify-content:center;">لوحة الصدارة بحاجة لربط الفايربيز 🌍</div>';
-        return;
-    }
-    
-    // إشارة مباشرة لـ 'leaderboard'
     const leaderboardRef = ref(db, 'leaderboard');
     
-    // نستخدم get العادية أولاً لضمان عدم حدوث كراش الاستعلام على قاعدة فارغة
     get(leaderboardRef).then((snapshot) => {
         let players = [];
         
-        // إذا كانت القاعدة تحتوي على بيانات فعلاً، نقوم بمعالجتها وترتيبها
         if (snapshot.exists()) {
             snapshot.forEach((childSnapshot) => { 
                 players.push(childSnapshot.val()); 
             });
-            // ترتيب من الأعلى سكور للأقل
             players.sort((a, b) => b.score - a.score);
-            // أخذ أول 10 لاعبين فقط
             players = players.slice(0, 10);
         }
 
         if (currentTab === 'players') {
             leaderboardList.innerHTML = '';
-            // إذا كانت المصفوفة فارغة (أول مرة تفتح اللعبة والقاعدة بيضاء)
             if(players.length === 0) {
-                leaderboardList.innerHTML = '<div class="leaderboard-item" style="justify-content:center; font-size:13px; color:#a2a0ff;">لا توجد نتائج بعد! كن أول المنافسين واكسر الرقم القياسي 🏆</div>';
+                leaderboardList.innerHTML = '<div class="leaderboard-item" style="justify-content:center; font-size:13px; color:#a2a0ff; padding:20px 10px;">لا توجد نتائج بعد! كن أول المنافسين واكسر الرقم القياسي 🏆</div>';
                 return;
             }
             players.forEach((p, idx) => {
@@ -490,7 +429,7 @@ function renderLeaderboard() {
         } else {
             leaderboardList.innerHTML = '';
             if(players.length === 0) {
-                leaderboardList.innerHTML = '<div class="leaderboard-item" style="justify-content:center; font-size:13px; color:#a2a0ff;">لا توجد دول في الصدارة بعد!</div>';
+                leaderboardList.innerHTML = '<div class="leaderboard-item" style="justify-content:center; font-size:13px; color:#a2a0ff; padding:20px 10px;">لا توجد دول في الصدارة بعد!</div>';
                 return;
             }
             let countryScores = {};
@@ -508,7 +447,66 @@ function renderLeaderboard() {
         }
     }).catch(err => {
         console.error("Firebase Error Details:", err);
-        // في حالة وجود أي خطأ آخر، سيعرض التنبيه النظيف بدلاً من توقف اللعبة
-        leaderboardList.innerHTML = '<div class="leaderboard-item" style="justify-content:center; color:#ff7676;">لوحة الصدارة فارغة حالياً بانتظار أول سكور! 🎮</div>';
+        leaderboardList.innerHTML = '<div class="leaderboard-item" style="justify-content:center; color:#ff7676; padding:20px 10px;">لوحة الصدارة فارغة حالياً بانتظار أول سكور! 🎮</div>';
     });
+}
+
+function switchScreen(targetScreen) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    targetScreen.classList.add('active');
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function getCategoryArabicName(cat) {
+    const names = { countries: "🌍 أعلام الدول", cars: "🚗 شعارات السيارات", monuments: "🏛️ معالم أثرية", general: "💡 معلومات عامة" };
+    return names[cat] || "عام";
+}
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    themeToggle.innerText = newTheme === 'dark' ? '🌙' : '☀️';
+    localStorage.setItem('game_theme', newTheme);
+}
+
+function toggleSound() {
+    gameState.isSoundEnabled = !gameState.isSoundEnabled;
+    soundToggle.innerText = gameState.isSoundEnabled ? "🔊" : "🔇";
+    localStorage.setItem('game_sound', gameState.isSoundEnabled);
+}
+
+function playSound(type) {
+    if (!gameState.isSoundEnabled) return;
+    try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        const ctx = new AudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain); gain.connect(ctx.destination);
+        if (type === 'correct') {
+            osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+            osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1);
+            gain.gain.setValueAtTime(0.1, ctx.currentTime);
+            osc.start(); osc.stop(ctx.currentTime + 0.2);
+        } else if (type === 'wrong') {
+            osc.frequency.setValueAtTime(196, ctx.currentTime);
+            osc.frequency.setValueAtTime(146, ctx.currentTime + 0.1);
+            gain.gain.setValueAtTime(0.15, ctx.currentTime);
+            osc.start(); osc.stop(ctx.currentTime + 0.25);
+        } else if (type === 'victory') {
+            osc.frequency.setValueAtTime(523, ctx.currentTime);
+            osc.frequency.setValueAtTime(784, ctx.currentTime + 0.15);
+            gain.gain.setValueAtTime(0.1, ctx.currentTime);
+            osc.start(); osc.stop(ctx.currentTime + 0.3);
+        }
+    } catch (e) { console.log("Audio API Blocked"); }
 }
