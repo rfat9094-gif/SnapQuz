@@ -203,7 +203,7 @@ async function generateDynamicQuestions() {
             });
         }
 
-        if (generatedQuestions.length > 0) {
+        if (generatedQuestions.length > 6) {
             gameState.allBankQuestions = generatedQuestions;
             console.log("تم تحديث الأسئلة الحية من جيت هاب بنجاح! 🚀");
         }
