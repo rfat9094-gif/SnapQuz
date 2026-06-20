@@ -29,16 +29,15 @@ let gameState = {
     highScore: 0
 };
 
-// 🌍 معالجة الرابط العربي برمجياً لضمان عدم حدوث Network Error مع المتصفحات
-const githubRawUrl = encodeURI("https://raw.githubusercontent.com/rfat9094-git/SnapQuiz/main/لعبه/questions.json");
+// الرابط الأساسي لملف جيت هاب
+const githubRawUrl = "https://raw.githubusercontent.com/rfat9094-git/SnapQuiz/main/%D9%84%D8%B9%D8%A8%D9%87/questions.json";
 
-// بنك احتياطي في حال انقطع الإنترنت تماماً عن المستخدم
+// بنك احتياطي بدائي جداً عشان لو مفيش نت خالص
 const backupQuestions = [
-    { "id": "c_1", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "مصر", "options": ["مصر", "سوريا", "العراق", "اليمن"], "image": "https://flagcdn.com/w320/eg.png" },
-    { "id": "car_1", "category": "cars", "question": "ما هي شركة السيارات صاحبة هذا الشعار؟", "correctAnswer": "مرسيدس بنز", "options": ["مرسيدس بنز", "بي إم دبليو", "أودي", "فولكس فاجن"], "image": "https://www.carlogos.org/car-logos/mercedes-benz-logo.png" }
+    { "id": "b_1", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "مصر", "options": ["مصر", "سوريا", "العراق", "اليمن"], "image": "https://flagcdn.com/w320/eg.png" }
 ];
 
-// جلب عناصر الـ HTML بالـ IDs الصحيحة المطابقة لملفك
+// عناصر الـ HTML
 const startScreen = document.getElementById('start-screen');
 const triviaScreen = document.getElementById('trivia-screen');
 const resultScreen = document.getElementById('result-screen');
@@ -60,7 +59,6 @@ function initGameEngine() {
     gameState.highScore = parseInt(localStorage.getItem('quiz_high_score')) || 0;
     gameState.allBankQuestions = [...backupQuestions];
     
-    // ربط نقرات كروت الأقسام
     document.querySelectorAll('.category-card').forEach(card => {
         card.onclick = () => {
             const selectedCategory = card.getAttribute('data-cat');
@@ -72,20 +70,21 @@ function initGameEngine() {
     if(themeToggle) themeToggle.onclick = toggleTheme;
     if(soundToggle) soundToggle.onclick = toggleSound;
 
-    // تشغيل جلب الأسئلة الحية فوراً من جيت هاب المحدث عبر Make
+    // جلب الأسئلة فوراً عند تشغيل الصفحة
     loadOnlineQuestions();
 }
 
-// 🔥 الدالة السحرية لجلب بيانات جيت هاب الحية وإعادة هيكلتها لتطابق الفلتر فوراً
+// 🔥 الدالة المحدثة لكسر كاش جيت هاب نهائياً وقراءة التعديلات الحية فوراً
 async function loadOnlineQuestions() {
     try {
-        // إضافة طابع زمني (Timestamp) لمنع المتصفح من كاش السيرفر وضمان جلب الأسئلة الجديدة دائماً
-        const response = await fetch(`${githubRawUrl}?cacheBust=${new Date().getTime()}`);
+        // حيلة كسر الكاش: إضافة طابع زمني فريد لكل طلب فرعي نضمن بيه جلب الملف طازة من السيرفر
+        const uniqueUrl = `${githubRawUrl}?v=${Date.now()}`;
+        
+        const response = await fetch(uniqueUrl, { cache: "no-store" });
         if (response.ok) {
             const data = await response.json();
             let remoteQuestions = [];
             
-            // قراءة المصفوفات المنفصلة من جيت هاب وتحويلها لهيكل موحد يفهمه الفلتر
             const categories = ['countries', 'cars', 'monuments', 'general'];
             categories.forEach(cat => {
                 if (data[cat] && Array.isArray(data[cat])) {
@@ -102,28 +101,32 @@ async function loadOnlineQuestions() {
                 }
             });
             
-            if(remoteQuestions.length > 6) {
+            if(remoteQuestions.length > 0) {
                 gameState.allBankQuestions = [...remoteQuestions];
-                console.log(`📡 متصل بجيت هاب بنجاح! تم تحميل ${remoteQuestions.length} سؤال حي متجدد.`);
+                // سطر لفحص الأسئلة في الـ Console والتأكد من تحديثها
+                console.log("🔥 الأسئلة الحالية المجلوبة من جيت هاب بنجاح:", gameState.allBankQuestions);
             }
         }
     } catch (e) { 
-        console.log("فشل الاتصال الحي، تم تشغيل البنك المحلي مؤقتاً.", e);
+        console.log("فشل جلب الأسئلة الحية، تم الاعتماد على الاحتياطي:", e);
+        gameState.allBankQuestions = [...backupQuestions];
     }
 }
 
 function startSpecificCategory(category) {
-    // تصفية الأسئلة بناءً على القسم المختار من البيانات الحية
+    // تصفية الأسئلة للقسم المختار
     let categoryPool = gameState.allBankQuestions.filter(q => q.category === category);
     
-    // حماية لو القسم لسه محملش من جيت هاب
+    // إذا لم يجد أسئلة في هذا القسم، يعرض كل الأسئلة المتاحة كحماية
     if(categoryPool.length === 0) {
-        categoryPool = backupQuestions.filter(q => q.category === category);
+        categoryPool = [...gameState.allBankQuestions];
     }
 
-    // خلط عشوائي واختيار 10 أسئلة حية لتظهر للمستخدم
+    // ترتيب عشوائي واختيار أول 10 أسئلة حية كاملة
     gameState.activeQuestions = shuffleArray([...categoryPool]).slice(0, 10);
     
+    console.log(`🎯 القسم المختار: ${category} | عدد الأسئلة المتوفرة للتحدي: ${gameState.activeQuestions.length}`);
+
     gameState.score = 0;
     gameState.correctAnswersCount = 0;
     gameState.wrongAnswersCount = 0;
@@ -149,7 +152,6 @@ function renderQuestion() {
         questionCategory.innerText = arabicNames[currentQuestion.category] || "عام";
     }
     
-    // التعامل مع الصور أونلاين
     if (currentQuestion.image && questionImage) {
         questionImage.src = currentQuestion.image;
         if(questionImageContainer) questionImageContainer.classList.remove('hidden');
@@ -157,14 +159,12 @@ function renderQuestion() {
         if(questionImageContainer) questionImageContainer.classList.add('hidden');
     }
 
-    // بناء شبكة الأزرار والخانات ديناميكياً
     if(answersGrid) {
         answersGrid.innerHTML = "";
         let opts = currentQuestion.options && currentQuestion.options.length > 0 ? [...currentQuestion.options] : [currentQuestion.correctAnswer];
         
-        // حماية لو الـ options ناقصة
-        if(opts.length < 4 && opts[0] === currentQuestion.correctAnswer) {
-            opts = [currentQuestion.correctAnswer, "اختيار احتياطي أ", "اختيار احتياطي ب", "اختيار احتياطي ج"];
+        if(opts.length < 4) {
+            opts = [currentQuestion.correctAnswer, "خيار إضافي ب", "خيار إضافي ج", "خيار إضافي د"];
         }
         
         opts = shuffleArray([...opts]);
