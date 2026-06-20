@@ -29,28 +29,16 @@ let gameState = {
     highScore: 0
 };
 
-// بنك الأسئلة الاحتياطي الشامل (شغال أوفلاين في كل الأقسام)
+// 🌍 معالجة الرابط العربي برمجياً لضمان عدم حدوث Network Error مع المتصفحات
+const githubRawUrl = encodeURI("https://raw.githubusercontent.com/rfat9094-git/SnapQuiz/main/لعبه/questions.json");
+
+// بنك احتياطي في حال انقطع الإنترنت تماماً عن المستخدم
 const backupQuestions = [
-    // أعلام الدول
     { "id": "c_1", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "مصر", "options": ["مصر", "سوريا", "العراق", "اليمن"], "image": "https://flagcdn.com/w320/eg.png" },
-    { "id": "c_2", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "السعودية", "options": ["السعودية", "الكويت", "عمان", "قطر"], "image": "https://flagcdn.com/w320/sa.png" },
-    { "id": "c_3", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "فلسطين", "options": ["فلسطين", "الأردن", "سوريا", "لبنان"], "image": "https://flagcdn.com/w320/ps.png" },
-    
-    // السيارات
-    { "id": "car_1", "category": "cars", "question": "ما هي شركة السيارات صاحبة هذا الشعار؟", "correctAnswer": "مرسيدس بنز", "options": ["مرسيدس بنز", "بي إم دبليو", "أودي", "فولكس فاجن"], "image": "https://www.carlogos.org/car-logos/mercedes-benz-logo.png" },
-    { "id": "car_2", "category": "cars", "question": "ما هي شركة السيارات صاحبة هذا الشعار؟", "correctAnswer": "بي إم دبليو", "options": ["بي إم دبليو", "تويوتا", "فورد", "هيونداي"], "image": "https://www.carlogos.org/car-logos/bmw-logo.png" },
-    
-    // المعالم
-    { "id": "m_1", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "الأهرامات", "options": ["الأهرامات", "برج إيفل", "سور الصين", "تاج محل"], "image": "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=500" },
-    
-    // معلومات عامة
-    { "id": "g_1", "category": "general", "question": "كم عدد كواكب المجموعة الشمسية؟", "correctAnswer": "8 كواكب", "options": ["8 كواكب", "9 كواكب", "7 كواكب", "6 كواكب"], "image": null },
-    { "id": "g_2", "category": "general", "question": "ما هو أطول نهر في العالم؟", "correctAnswer": "نهر النيل", "options": ["نهر النيل", "نهر الأمازون", "نهر الميسيسيبي", "نهر الدانوب"], "image": null }
+    { "id": "car_1", "category": "cars", "question": "ما هي شركة السيارات صاحبة هذا الشعار؟", "correctAnswer": "مرسيدس بنز", "options": ["مرسيدس بنز", "بي إم دبليو", "أودي", "فولكس فاجن"], "image": "https://www.carlogos.org/car-logos/mercedes-benz-logo.png" }
 ];
 
-const githubRawUrl = "https://raw.githubusercontent.com/rfat9094-git/SnapQuiz/main/%D9%84%D8%B9%D9%81%D9%87/questions.json";
-
-// العناصر الرئيسية من الـ HTML
+// جلب عناصر الـ HTML بالـ IDs الصحيحة المطابقة لملفك
 const startScreen = document.getElementById('start-screen');
 const triviaScreen = document.getElementById('trivia-screen');
 const resultScreen = document.getElementById('result-screen');
@@ -70,10 +58,9 @@ initGameEngine();
 
 function initGameEngine() {
     gameState.highScore = parseInt(localStorage.getItem('quiz_high_score')) || 0;
-    // نبدأ بالأسئلة الاحتياطية لضمان عمل اللعبة فوراً
     gameState.allBankQuestions = [...backupQuestions];
     
-    // ربط الأقسام بالنقرات بشكل صحيح
+    // ربط نقرات كروت الأقسام
     document.querySelectorAll('.category-card').forEach(card => {
         card.onclick = () => {
             const selectedCategory = card.getAttribute('data-cat');
@@ -85,25 +72,27 @@ function initGameEngine() {
     if(themeToggle) themeToggle.onclick = toggleTheme;
     if(soundToggle) soundToggle.onclick = toggleSound;
 
+    // تشغيل جلب الأسئلة الحية فوراً من جيت هاب المحدث عبر Make
     loadOnlineQuestions();
 }
 
-// 🔥 دالة مطورة لقراءة ملف الـ JSON أونلاين وتحويله لهيكل يفهمه الفلتر
+// 🔥 الدالة السحرية لجلب بيانات جيت هاب الحية وإعادة هيكلتها لتطابق الفلتر فوراً
 async function loadOnlineQuestions() {
     try {
-        const response = await fetch(githubRawUrl);
+        // إضافة طابع زمني (Timestamp) لمنع المتصفح من كاش السيرفر وضمان جلب الأسئلة الجديدة دائماً
+        const response = await fetch(`${githubRawUrl}?cacheBust=${new Date().getTime()}`);
         if (response.ok) {
             const data = await response.json();
             let remoteQuestions = [];
             
-            // هنا بنمر على الأقسام المكتوبة في ملف الـ JSON بتاعك ونضيف التاغ لكل سؤال
+            // قراءة المصفوفات المنفصلة من جيت هاب وتحويلها لهيكل موحد يفهمه الفلتر
             const categories = ['countries', 'cars', 'monuments', 'general'];
             categories.forEach(cat => {
                 if (data[cat] && Array.isArray(data[cat])) {
                     data[cat].forEach(item => {
                         remoteQuestions.push({
                             id: item.id || Math.random().toString(),
-                            category: cat, // ربط القسم بالسؤال غصب عنه لضمان الفلترة
+                            category: cat, 
                             question: item.question,
                             options: item.options || [],
                             correctAnswer: item.correctAnswer || item.answer,
@@ -113,31 +102,26 @@ async function loadOnlineQuestions() {
                 }
             });
             
-            if(remoteQuestions.length > 8) {
-                // دمج الأسئلة المحملة مع الاحتياطية وحذف المكرر
-                gameState.allBankQuestions = [...remoteQuestions, ...backupQuestions];
-                console.log(`تم تحميل ${remoteQuestions.length} سؤال أونلاين بنجاح! 🚀`);
+            if(remoteQuestions.length > 0) {
+                gameState.allBankQuestions = [...remoteQuestions];
+                console.log(`📡 متصل بجيت هاب بنجاح! تم تحميل ${remoteQuestions.length} سؤال حي متجدد.`);
             }
         }
     } catch (e) { 
-        console.log("حدث خطأ أثناء الاتصال بجيت هاب، تم الانتقال للوضع المحلي بأمان.", e); 
+        console.log("فشل الاتصال الحي، تم تشغيل البنك المحلي مؤقتاً.", e);
     }
 }
 
 function startSpecificCategory(category) {
-    // فلترة الأسئلة بناءً على القسم المختار
+    // تصفية الأسئلة بناءً على القسم المختار من البيانات الحية
     let categoryPool = gameState.allBankQuestions.filter(q => q.category === category);
     
-    // حماية: لو القسم فاضي أونلاين، خد من الاحتياطي
+    // حماية لو القسم لسه محملش من جيت هاب
     if(categoryPool.length === 0) {
         categoryPool = backupQuestions.filter(q => q.category === category);
     }
-    // حماية قصوى: لو لسه فاضي، اعرض كل بنك الأسئلة المتاحة
-    if(categoryPool.length === 0) {
-        categoryPool = [...gameState.allBankQuestions];
-    }
 
-    // ترتيب عشوائي واختيار 10 أسئلة للتحدي
+    // خلط عشوائي واختيار 10 أسئلة حية لتظهر للمستخدم
     gameState.activeQuestions = shuffleArray([...categoryPool]).slice(0, 10);
     
     gameState.score = 0;
@@ -165,6 +149,7 @@ function renderQuestion() {
         questionCategory.innerText = arabicNames[currentQuestion.category] || "عام";
     }
     
+    // التعامل مع الصور أونلاين
     if (currentQuestion.image && questionImage) {
         questionImage.src = currentQuestion.image;
         if(questionImageContainer) questionImageContainer.classList.remove('hidden');
@@ -172,15 +157,14 @@ function renderQuestion() {
         if(questionImageContainer) questionImageContainer.classList.add('hidden');
     }
 
-    // بناء الأزرار (الخيارات الأربعة)
+    // بناء شبكة الأزرار والخانات ديناميكياً
     if(answersGrid) {
         answersGrid.innerHTML = "";
+        let opts = currentQuestion.options && currentQuestion.options.length > 0 ? [...currentQuestion.options] : [currentQuestion.correctAnswer];
         
-        let opts = [];
-        if (currentQuestion.options && currentQuestion.options.length > 0) {
-            opts = [...currentQuestion.options];
-        } else {
-            opts = [currentQuestion.correctAnswer, "خيار خطأ 1", "خيار خطأ 2", "خيار خطأ 3"];
+        // حماية لو الـ options ناقصة
+        if(opts.length < 4 && opts[0] === currentQuestion.correctAnswer) {
+            opts = [currentQuestion.correctAnswer, "اختيار احتياطي أ", "اختيار احتياطي ب", "اختيار احتياطي ج"];
         }
         
         opts = shuffleArray([...opts]);
