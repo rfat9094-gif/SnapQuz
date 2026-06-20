@@ -51,10 +51,10 @@ const backupQuestions = [
     { "id": "c_3", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "الإمارات", "options": ["الإمارات", "الأردن", "فلسطين", "السودان"], "image": "https://flagcdn.com/w320/ae.png" },
     { "id": "c_4", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "الأردن", "options": ["الأردن", "الكويت", "البحرين", "تونس"], "image": "https://flagcdn.com/w320/jo.png" },
     { "id": "c_5", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "اليابان", "options": ["اليابان", "الصين", "كوريا الجنوبية", "فيتنام"], "image": "https://flagcdn.com/w320/jp.png" },
-    { "id": "c_6", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "فرنسا", "options": ["فرنسا", "إيطاليا", "روسيا", "هولندا"], "image": "https://flagcdn.com/w320/fr.png" },
+    { "id": "c_6", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم？", "correctAnswer": "فرنسا", "options": ["فرنسا", "إيطاليا", "روسيا", "هولندا"], "image": "https://flagcdn.com/w320/fr.png" },
     { "id": "c_7", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "البرازيل", "options": ["البرازيل", "الأرجنتين", "كولومبيا", "المكسيك"], "image": "https://flagcdn.com/w320/br.png" },
     { "id": "c_8", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "المغرب", "options": ["المغرب", "الجزائر", "تونس", "ليبيا"], "image": "https://flagcdn.com/w320/ma.png" },
-    { "id": "c_9", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم？", "correctAnswer": "كندا", "options": ["كندا", "أمريكا", "أستراليا", "بريطانيا"], "image": "https://flagcdn.com/w320/ca.png" },
+    { "id": "c_9", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "كندا", "options": ["كندا", "أمريكا", "أستراليا", "بريطانيا"], "image": "https://flagcdn.com/w320/ca.png" },
     { "id": "c_10", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "ألمانيا", "options": ["ألمانيا", "بلجيكا", "إسبانيا", "البرتغال"], "image": "https://flagcdn.com/w320/de.png" },
     { "id": "c_11", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "فلسطين", "options": ["فلسطين", "الأردن", "الكويت", "عمان"], "image": "https://flagcdn.com/w320/ps.png" },
     { "id": "c_12", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "إيطاليا", "options": ["إيطاليا", "المكسيك", "فرنسا", "إسبانيا"], "image": "https://flagcdn.com/w320/it.png" },
@@ -64,7 +64,7 @@ const backupQuestions = [
     { "id": "car_2", "category": "cars", "question": "ما هي شركة السيارات صاحبة هذا الشعار؟", "correctAnswer": "بي إم دبليو", "options": ["بي إم دبليو", "مرسيدس بنز", "فورد", "هيونداي"], "image": "https://www.carlogos.org/car-logos/bmw-logo.png" },
     { "id": "car_3", "category": "cars", "question": "ما هي شركة السيارات صاحبة هذا الشعار؟", "correctAnswer": "تويوتا", "options": ["تويوتا", "هوندا", "نيسان", "مازدا"], "image": "https://www.carlogos.org/car-logos/toyota-logo.png" },
     { "id": "car_4", "category": "cars", "question": "ما هي شركة السيارات صاحبة هذا الشعار؟", "correctAnswer": "هيونداي", "options": ["هيونداي", "كيا", "هوندا", "سوزوكي"], "image": "https://www.carlogos.org/car-logos/hyundai-logo.png" },
-    { "id": "car_5", "category": "cars", "question": "ما هي شركة السيارات صاحبة هذا الشعار？", "correctAnswer": "فورد", "options": ["فورد", "شيفروليه", "جيب", "دودج"], "image": "https://www.carlogos.org/car-logos/ford-logo.png" },
+    { "id": "car_5", "category": "cars", "question": "ما هي شركة السيارات صاحبة هذا الشعار؟", "correctAnswer": "فورد", "options": ["فورد", "شيفروليه", "جيب", "دودج"], "image": "https://www.carlogos.org/car-logos/ford-logo.png" },
     { "id": "car_6", "category": "cars", "question": "ما هي شركة السيارات صاحبة هذا الشعار؟", "correctAnswer": "لامبورغيني", "options": ["لامبورغيني", "فيراري", "بورشه", "بوجاتي"], "image": "https://www.carlogos.org/car-logos/lamborghini-logo.png" },
     { "id": "car_7", "category": "cars", "question": "ما هي شركة السيارات صاحبة هذا الشعار؟", "correctAnswer": "فيراري", "options": ["فيراري", "بورشه", "موجاتي", "موستانج"], "image": "https://www.carlogos.org/car-logos/ferrari-logo.png" },
     { "id": "car_8", "category": "cars", "question": "ما هي شركة السيارات صاحبة هذا الشعار؟", "correctAnswer": "أودي", "options": ["أودي", "بي إم دبليو", "تويوتا", "نيسان"], "image": "https://www.carlogos.org/car-logos/audi-logo.png" },
@@ -77,7 +77,7 @@ const backupQuestions = [
     { "id": "m_2", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "برج إيفل (فرنسا)", "options": ["برج إيفل (فرنسا)", "برج بيزا المائل", "تمثال الحرية", "ساعة بيج بن"], "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=500" },
     { "id": "m_3", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "تاج محل (الهند)", "options": ["تاج محل (الهند)", "البيت الأبيض", "مسرح الكولوسيوم", "البتراء (الأردن)"], "image": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=500" },
     { "id": "m_4", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "تمثال الحرية (أمريكا)", "options": ["تمثال الحرية (أمريكا)", "تمثال المسيح الفادي", "برج خليفة", "برج إيفل"], "image": "https://images.unsplash.com/photo-1605130284535-11dd9ebc5277?w=500" },
-    { "id": "m_5", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "الكولوسيوم (إيطاليا)", "options": ["الكولوسيوم (إيطاليا)", "الأهرامات", "البتراء", "سور الصين العظيم"], "image": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=500" },
+    { "id": "m_5", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير？", "correctAnswer": "الكولوسيوم (إيطاليا)", "options": ["الكولوسيوم (إيطاليا)", "الأهرامات", "البتراء", "سور الصين العظيم"], "image": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=500" },
     { "id": "m_6", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "برج خليفة (الإمارات)", "options": ["برج خليفة (الإمارات)", "برج إيفل", "ساعة بيج بن", "تاج محل"], "image": "https://images.unsplash.com/photo-1597655601841-214a4cfe8b2c?w=500" },
     { "id": "m_7", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "برج بيزا المائل (إيطاليا)", "options": ["برج بيزا المائل (إيطاليا)", "برج إيفل", "ساعة بيج بن", "البيت الأبيض"], "image": "https://images.unsplash.com/photo-1543872084-c7bd3822856f?w=500" },
     { "id": "m_8", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "سور الصين العظيم (الصين)", "options": ["سور الصين العظيم (الصين)", "تاج محل", "الكولوسيوم", "الأهرامات"], "image": "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=500" },
@@ -128,8 +128,8 @@ let currentTab = 'players';
 document.addEventListener("DOMContentLoaded", () => {
     loadSavedData(); 
     setupClickListeners();
-    setupBackupQuestions(); // ملء البنك احتياطياً فوراً لمنع تعليق الواجهة
-    generateDynamicQuestions(); // جلب الأسئلة الخارجية من جيت هاب في الخلفية
+    setupBackupQuestions(); 
+    generateDynamicQuestions(); 
 });
 
 function setupClickListeners() {
@@ -203,8 +203,7 @@ async function generateDynamicQuestions() {
             });
         }
 
-        // تم حذف الشرط المقيد المقيد ليعتمد أي عدد متاح من جيت هاب فوراً وبأمان!
-        if (generatedQuestions.length > 6) {
+        if (generatedQuestions.length > 0) {
             gameState.allBankQuestions = generatedQuestions;
             console.log("تم تحديث الأسئلة الحية من جيت هاب بنجاح! 🚀");
         }
@@ -248,8 +247,6 @@ function startSpecificCategory(category) {
     }
 
     let shuffled = shuffleArray([...categoryPool]);
-    
-    // 🎯 التحديث الأول: تغيير عدد الأسئلة لتصبح 10 أسئلة بدلاً من 4 في الجولة
     gameState.activeQuestions = shuffled.slice(0, 10); 
     
     gameState.score = 0;
@@ -351,14 +348,10 @@ function handleTimeOut() {
 
 function resetTimer() { clearInterval(gameState.timer); }
 
-// 🎯 التحديث الثاني: استدعاء فاصل إعلاني تلقائي عند انتهاء الأسئلة وقبل شاشة النتائج
 function endGameSession() {
     console.log("جاري إظهار الإعلان البيني تلقائياً... 📺");
-    
-    // تنبيه تجريبي يمثل وقت الإعلان (يمكنك استبداله بكود شبكة الإعلانات الفعلي لاحقاً)
     alert("📺 فاصل إعلاني سريع... سيتم عرض النتيجة فوراً بعد الإعلان!");
 
-    // ⏳ انتظار ثانيتين (وقت عرض الإعلان التخيلي) ثم الانتقال التلقائي للنتائج وحفظ النقاط
     setTimeout(() => {
         switchScreen(resultScreen);
         playSound('victory');
@@ -399,6 +392,7 @@ function saveScoreToOnlineDatabase(name, country, score) {
     });
 }
 
+// 🎯 الدالة المحدثة كلياً لضمان الجلب الآمن بدون كراش وبدون قيود الـ Auth القديمة
 function renderLeaderboard() {
     leaderboardList.innerHTML = '<div style="text-align:center; padding:10px; font-size:12px;">جاري تحميل الترتيب...⏳</div>';
     if (!db) {
@@ -409,13 +403,16 @@ function renderLeaderboard() {
     const leaderboardQuery = query(ref(db, 'leaderboard'), orderByChild('score'), limitToLast(10));
     get(leaderboardQuery).then((snapshot) => {
         let players = [];
-        snapshot.forEach((childSnapshot) => { players.push(childSnapshot.val()); });
-        players.reverse();
+        
+        if (snapshot.exists()) {
+            snapshot.forEach((childSnapshot) => { players.push(childSnapshot.val()); });
+            players.reverse();
+        }
 
         if (currentTab === 'players') {
             leaderboardList.innerHTML = '';
             if(players.length === 0) {
-                leaderboardList.innerHTML = '<div class="leaderboard-item">لا توجد نتائج بعد!</div>';
+                leaderboardList.innerHTML = '<div class="leaderboard-item" style="justify-content:center;">لا توجد نتائج بعد! كن أول المنافسين 🏆</div>';
                 return;
             }
             players.forEach((p, idx) => {
@@ -426,6 +423,11 @@ function renderLeaderboard() {
                 leaderboardList.innerHTML += `<div class="leaderboard-item"><span>${medal} ${p.name} ${flag}</span><span>⭐ ${p.score}</span></div>`;
             });
         } else {
+            leaderboardList.innerHTML = '';
+            if(players.length === 0) {
+                leaderboardList.innerHTML = '<div class="leaderboard-item" style="justify-content:center;">لا توجد دول في الصدارة بعد!</div>';
+                return;
+            }
             let countryScores = {};
             players.forEach(p => { countryScores[p.country] = (countryScores[p.country] || 0) + p.score; });
             
@@ -433,7 +435,6 @@ function renderLeaderboard() {
                 return { country: key, score: countryScores[key] };
             }).sort((a,b) => b.score - a.score);
 
-            leaderboardList.innerHTML = '';
             let countryFlags = { "مصر": "🇪🇬", "السعودية": "🇸🇦", "الإمارات": "🇦🇪", "الأردن": "🇯🇴" };
             sortedCountries.forEach((c, idx) => {
                 let flag = countryFlags[c.country] || "🌍";
@@ -441,7 +442,8 @@ function renderLeaderboard() {
             });
         }
     }).catch(err => {
-        leaderboardList.innerHTML = '<div class="leaderboard-item">خطأ في جلب البيانات.</div>';
+        console.error(err);
+        leaderboardList.innerHTML = '<div class="leaderboard-item" style="justify-content:center;">خطأ في جلب البيانات، تأكد من حفظ الـ Rules.</div>';
     });
 }
 
