@@ -47,10 +47,10 @@ let gameState = {
 const backupQuestions = [
     // أعلام الدول
     { "id": "c_1", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "مصر", "options": ["مصر", "سوريا", "العراق", "اليمن"], "image": "https://flagcdn.com/w320/eg.png" },
-    { "id": "c_2", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم？", "correctAnswer": "السعودية", "options": ["السعودية", "الكويت", "عمان", "قطر"], "image": "https://flagcdn.com/w320/sa.png" },
+    { "id": "c_2", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "السعودية", "options": ["السعودية", "الكويت", "عمان", "قطر"], "image": "https://flagcdn.com/w320/sa.png" },
     { "id": "c_3", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "الإمارات", "options": ["الإمارات", "الأردن", "فلسطين", "السودان"], "image": "https://flagcdn.com/w320/ae.png" },
-    { "id": "c_4", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم？", "correctAnswer": "الأردن", "options": ["الأردن", "الكويت", "البحرين", "تونس"], "image": "https://flagcdn.com/w320/jo.png" },
-    { "id": "c_5", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "اليابان", "options": ["اليابان", "الصين", "كوريا الجنوبية", "فيتنام"], "image": "https://flagcdn.com/w320/jp.png" },
+    { "id": "c_4", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "الأردن", "options": ["الأردن", "الكويت", "البحرين", "تونس"], "image": "https://flagcdn.com/w320/jo.png" },
+    { "id": "c_5", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم？", "correctAnswer": "اليابان", "options": ["اليابان", "الصين", "كوريا الجنوبية", "فيتنام"], "image": "https://flagcdn.com/w320/jp.png" },
     { "id": "c_6", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "فرنسا", "options": ["فرنسا", "إيطاليا", "روسيا", "هولندا"], "image": "https://flagcdn.com/w320/fr.png" },
     { "id": "c_7", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "البرازيل", "options": ["البرازيل", "الأرجنتين", "كولومبيا", "المكسيك"], "image": "https://flagcdn.com/w320/br.png" },
     { "id": "c_8", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "المغرب", "options": ["المغرب", "الجزائر", "تونس", "ليبيا"], "image": "https://flagcdn.com/w320/ma.png" },
@@ -60,7 +60,7 @@ const backupQuestions = [
     { "id": "c_12", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "إيطاليا", "options": ["إيطاليا", "المكسيك", "فرنسا", "إسبانيا"], "image": "https://flagcdn.com/w320/it.png" },
     
     // السيارات
-    { "id": "car_1", "category": "cars", "question": "ما هي شركة السيارات صاحبة هذا الشعار؟", "correctAnswer": "مرسيدس بنز", "options": ["مرسيدس بنز", "بي إم دبليو", "أودي", "فولكس فاجن"], "image": "https://www.carlogos.org/car-logos/mercedes-benz-logo.png" },
+    { "id": "car_1", "category": "cars", "question": "ما هي شركة السيارات صاحبة هذا شاشعار؟", "correctAnswer": "مرسيدس بنز", "options": ["مرسيدس بنز", "بي إم دبليو", "أودي", "فولكس فاجن"], "image": "https://www.carlogos.org/car-logos/mercedes-benz-logo.png" },
     { "id": "car_2", "category": "cars", "question": "ما هي شركة السيارات صاحبة هذا الشعار؟", "correctAnswer": "بي إم دبليو", "options": ["بي إم دبليو", "مرسيدس بنز", "فورد", "هيونداي"], "image": "https://www.carlogos.org/car-logos/bmw-logo.png" },
     { "id": "car_3", "category": "cars", "question": "ما هي شركة السيارات صاحبة هذا الشعار؟", "correctAnswer": "تويوتا", "options": ["تويوتا", "هوندا", "نيسان", "مازدا"], "image": "https://www.carlogos.org/car-logos/toyota-logo.png" },
     { "id": "car_4", "category": "cars", "question": "ما هي شركة السيارات صاحبة هذا الشعار؟", "correctAnswer": "هيونداي", "options": ["هيونداي", "كيا", "هوندا", "سوزوكي"], "image": "https://www.carlogos.org/car-logos/hyundai-logo.png" },
@@ -77,7 +77,7 @@ const backupQuestions = [
     { "id": "m_2", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "برج إيفل (فرنسا)", "options": ["برج إيفل (فرنسا)", "برج بيزا المائل", "تمثال الحرية", "ساعة بيج بن"], "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=500" },
     { "id": "m_3", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "تاج محل (الهند)", "options": ["تاج محل (الهند)", "البيت الأبيض", "مسرح الكولوسيوم", "البتراء (الأردن)"], "image": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=500" },
     { "id": "m_4", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "تمثال الحرية (أمريكا)", "options": ["تمثال الحرية (أمريكا)", "تمثال المسيح الفادي", "برج خليفة", "برج إيفل"], "image": "https://images.unsplash.com/photo-1605130284535-11dd9ebc5277?w=500" },
-    { "id": "m_5", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "الكولوسيوم (إيطاليا)", "options": ["الكولوسيوم (إيطاليا)", "الأهرامات", "البتراء", "سور الصين العظيم"], "image": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=500" },
+    { "id": "m_5", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير？", "correctAnswer": "الكولوسيوم (إيطاليا)", "options": ["الكولوسيوم (إيطاليا)", "الأهرامات", "البتراء", "سور الصين العظيم"], "image": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=500" },
     { "id": "m_6", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "برج خليفة (الإمارات)", "options": ["برج خليفة (الإمارات)", "برج إيفل", "ساعة بيج بن", "تاج محل"], "image": "https://images.unsplash.com/photo-1597655601841-214a4cfe8b2c?w=500" },
     { "id": "m_7", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "برج بيزا المائل (إيطاليا)", "options": ["برج بيزا المائل (إيطاليا)", "برج إيفل", "ساعة بيج بن", "البيت الأبيض"], "image": "https://images.unsplash.com/photo-1543872084-c7bd3822856f?w=500" },
     { "id": "m_8", "category": "monuments", "question": "ما اسم هذا المعلم السياحي الشهير؟", "correctAnswer": "سور الصين العظيم (الصين)", "options": ["سور الصين العظيم (الصين)", "تاج محل", "الكولوسيوم", "الأهرامات"], "image": "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=500" },
@@ -85,7 +85,7 @@ const backupQuestions = [
     // معلومات عامة
     { "id": "g_1", "category": "general", "question": "كم عدد كواكب المجموعة الشمسية؟", "correctAnswer": "8 كواكب", "options": ["8 كواكب", "9 كواكب", "7 كواكب", "6 كواكب"], "image": null },
     { "id": "g_2", "category": "general", "question": "ما هو أكبر المحيطات على كوكب الأرض؟", "correctAnswer": "المحيط الهادئ", "options": ["المحيط الهادئ", "المحيط الأطلسي", "المحيط الهندي", "المحيط المتجمد"], "image": null },
-    { "id": "g_3", "category": "general", "question": "من هو العالم الذي اكتشف جاذبية الأرض？", "correctAnswer": "إسحاق نيوتن", "options": ["إسحاق نيوتن", "ألبيرت أينشتاين", "غاليليو غاليلي", "توماس إديسون"], "image": null },
+    { "id": "g_3", "category": "general", "question": "من هو العالم الذي اكتشف جاذبية الأرض؟", "correctAnswer": "إسحاق نيوتن", "options": ["إسحاق نيوتن", "ألبيرت أينشتاين", "غاليليو غاليلي", "توماس إديسون"], "image": null },
     { "id": "g_4", "category": "general", "question": "ما هو أطول نهر في العالم؟", "correctAnswer": "نهر النيل", "options": ["نهر النيل", "نهر الأمازون", "نهر الميسيسيبي", "نهر الدانوب"], "image": null },
     { "id": "g_5", "category": "general", "question": "ما هو الغاز الأساسي الذي يتنفسه الإنسان؟", "correctAnswer": "الأكسجين", "options": ["الأكسجين", "النيتروجين", "ثاني أكسيد الكربون", "الهيدروجين"], "image": null },
     { "id": "g_6", "category": "general", "question": "ما هي عاصمة جمهورية مصر العربية؟", "correctAnswer": "القاهرة", "options": ["القاهرة", "الإسكندرية", "الجيزة", "المنيا"], "image": null },
@@ -97,7 +97,6 @@ const backupQuestions = [
     { "id": "g_12", "category": "general", "question": "ما هو العضو المسؤول عن ضخ الدم في جسم الإنسان؟", "correctAnswer": "القلب", "options": ["القلب", "الرئتين", "الكبد", "المخ"], "image": null }
 ];
 
-const githubRawUrl = "https://raw.githubusercontent.com/rfat9094-git/SnapQuiz/main/لعبه/questions.json";
 const startScreen = document.getElementById('start-screen');
 const triviaScreen = document.getElementById('trivia-screen');
 const resultScreen = document.getElementById('result-screen');
@@ -128,8 +127,6 @@ let currentTab = 'players';
 document.addEventListener("DOMContentLoaded", () => {
     loadSavedData(); 
     setupClickListeners();
-    setupBackupQuestions(); 
-    generateDynamicQuestions(); 
 });
 
 function setupClickListeners() {
@@ -169,49 +166,6 @@ function setupClickListeners() {
     };
 }
 
-function setupBackupQuestions() {
-    gameState.allBankQuestions = [...backupQuestions];
-}
-
-async function generateDynamicQuestions() {
-    if(githubRawUrl.includes("YOUR_USERNAME")) return;
-
-    try {
-        const response = await fetch(githubRawUrl);
-        if (!response.ok) throw new Error("GitHub Not Stable");
-        const data = await response.json();
-        
-        let generatedQuestions = [];
-
-        ['countries', 'cars', 'monuments'].forEach(cat => {
-            if(data[cat]) {
-                data[cat].forEach(item => {
-                    generatedQuestions.push({
-                        id: item.id, category: cat, question: item.question,
-                        options: item.options, correctAnswer: item.correctAnswer, image: item.image
-                    });
-                });
-            }
-        });
-
-        if(data.general) {
-            data.general.forEach(item => {
-                generatedQuestions.push({
-                    id: item.id, category: "general", question: item.question,
-                    options: item.options, correctAnswer: item.correctAnswer, image: null
-                });
-            });
-        }
-
-        if (generatedQuestions.length > 0) {
-            gameState.allBankQuestions = generatedQuestions;
-            console.log("تم تحديث الأسئلة الحية من جيت هاب بنجاح! 🚀");
-        }
-    } catch (error) {
-        console.log("تعذر جلب جيت هاب، العمل بالوضع الاحتياطي السريع.");
-    }
-}
-
 function loadSavedData() {
     gameState.highScore = parseInt(localStorage.getItem('quiz_high_score')) || 0;
     gameState.currentLevel = parseInt(localStorage.getItem('quiz_player_level')) || 1;
@@ -238,23 +192,53 @@ function updateMainMenuStats() {
     }
 }
 
-function startSpecificCategory(category) {
-    let categoryPool = gameState.allBankQuestions.filter(q => q.category === category);
+// 🎯 التعديل الجوهري: الدالة تقوم بالسحب مباشرة من الفرع الخاص بالقسم داخل الفايربيز
+async function startSpecificCategory(category) {
+    switchScreen(triviaScreen);
+    // إظهار نص مؤقت أثناء التحميل الحقيقي من الفايربيز
+    qCategory.innerText = "جاري التحميل...";
+    qText.innerText = "انتظر ثواني لجلب الأسئلة الحية المتجددة... ⏳";
+    answersGrid.innerHTML = "";
+    qImageContainer.classList.add('hidden');
+    resetTimer();
 
-    if (categoryPool.length === 0) {
-        alert("القسم قيد التحميل أو غير متوفر حالياً...");
-        return;
+    let loadedQuestions = [];
+
+    // 1. محاولة جلب الداتا الحية من فرع الفايربيز الخاص بالقسم المختار مباشرة
+    if (db) {
+        try {
+            console.log(`محاولة جلب أسئلة حية لقسم: ${category}`);
+            const categoryRef = ref(db, category);
+            const snapshot = await get(categoryRef);
+            
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                // الفايربيز بيرجع البيانات كـ Object أو Array، هنا بنحولها بالكامل لـ Array جاهز
+                loadedQuestions = Object.values(data);
+                console.log(`تم سحب ${loadedQuestions.length} سؤال حي من الفايربيز بنجاح! 🚀`);
+            }
+        } catch (error) {
+            console.error("خطأ أثناء جلب الفايربيز، تحويل للوضع الاحتياطي الفوري:", error);
+        }
     }
 
-    let shuffled = shuffleArray([...categoryPool]);
+    // 2. حماية (Fallback): لو الفايربيز فاضي أو مفيش نت، اسحب فوراً من المصفوفة الثابتة
+    if (loadedQuestions.length === 0) {
+        console.log("العمل بالوضع الاحتياطي الأوفلاين السريع. 🛡️");
+        loadedQuestions = backupQuestions.filter(q => q.category === category);
+    }
+
+    // 3. الخلط والاختيار العشوائي لـ 10 أسئلة
+    let shuffled = shuffleArray([...loadedQuestions]);
     gameState.activeQuestions = shuffled.slice(0, 10); 
     
+    // إعادة تعيين إحصائيات الجولة الحالية
     gameState.score = 0;
     gameState.correctAnswersCount = 0;
     gameState.wrongAnswersCount = 0;
     gameState.currentQuestionIndex = 0;
 
-    switchScreen(triviaScreen);
+    // تشغيل السؤال الأول
     renderQuestion();
 }
 
@@ -392,7 +376,6 @@ function saveScoreToOnlineDatabase(name, country, score) {
     });
 }
 
-// 🎯 الدالة المحدثة كلياً والمؤمنة ضد الخطأ عند جلب قاعدة بيانات فارغة (أول سكور)
 function renderLeaderboard() {
     leaderboardList.innerHTML = '<div style="text-align:center; padding:10px; font-size:12px;">جاري تحميل الترتيب...⏳</div>';
     if (!db) {
