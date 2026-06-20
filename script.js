@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+import { getDatabase, ref, set, get, query, orderByChild, limitToLast } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
 const firebaseConfigReal = {
   apiKey: "AIzaSyBuKqorLPtSOdbp45L5MsXcEF2-laHFx60",
@@ -26,18 +26,20 @@ let gameState = {
     timeLeft: 15,
     isSoundEnabled: true,
     currentLevel: 1,
-    highScore: 0
+    highScore: 0,
+    playerName: "لاعب مجهول",
+    playerCountry: "مصر"
 };
 
-// الرابط الأساسي لملف جيت هاب
-const githubRawUrl = "https://raw.githubusercontent.com/rfat9094-git/SnapQuiz/main/%D9%84%D8%B9%D8%A8%D9%87/questions.json";
+// الرابط المباشر لملف الأسئلة على جيت هاب
+const githubRawUrl = "https://raw.githubusercontent.com/rfat9094-git/SnapQuiz/main/%D9%84%D8%B2%D8%A8%D9%87/questions.json";
 
-// بنك احتياطي بدائي جداً عشان لو مفيش نت خالص
+// بنك احتياطي بدائي جداً كحماية أوفلاين
 const backupQuestions = [
     { "id": "b_1", "category": "countries", "question": "إلى أي دولة ينتمي هذا العلم؟", "correctAnswer": "مصر", "options": ["مصر", "سوريا", "العراق", "اليمن"], "image": "https://flagcdn.com/w320/eg.png" }
 ];
 
-// عناصر الـ HTML
+// عناصر الـ HTML الأساسية
 const startScreen = document.getElementById('start-screen');
 const triviaScreen = document.getElementById('trivia-screen');
 const resultScreen = document.getElementById('result-screen');
@@ -49,9 +51,18 @@ const questionImage = document.getElementById('question-image');
 const questionImageContainer = document.getElementById('question-image-container');
 const progressBar = document.getElementById('progress-bar');
 
+// أزرار التحكم العلوية والجانبية
 const themeToggle = document.getElementById('theme-toggle');
 const soundToggle = document.getElementById('sound-toggle');
 const btnGoHome = document.getElementById('go-home-btn');
+const viewLeaderboardBtn = document.getElementById('view-leaderboard-btn');
+
+// عناصر لوحة الصدارة (Modal)
+const leaderboardModal = document.getElementById('leaderboard-modal');
+const closeLeaderboardBtn = document.getElementById('close-leaderboard-btn');
+const leaderboardList = document.getElementById('leaderboard-list');
+const tabPlayers = document.getElementById('tab-players');
+const tabCountries = document.getElementById('tab-countries');
 
 initGameEngine();
 
@@ -59,8 +70,15 @@ function initGameEngine() {
     gameState.highScore = parseInt(localStorage.getItem('quiz_high_score')) || 0;
     gameState.allBankQuestions = [...backupQuestions];
     
+    // ربط كروت الأقسام وبدء اللعب
     document.querySelectorAll('.category-card').forEach(card => {
         card.onclick = () => {
+            // حفظ الاسم والدولة المدخلين عند الضغط وبدء اللعبة
+            const nameInput = document.getElementById('player-name-input');
+            const countryInput = document.getElementById('player-country-input');
+            if(nameInput && nameInput.value.trim() !== "") gameState.playerName = nameInput.value.trim();
+            if(countryInput) gameState.playerCountry = countryInput.value;
+
             const selectedCategory = card.getAttribute('data-cat');
             startSpecificCategory(selectedCategory);
         };
@@ -70,17 +88,27 @@ function initGameEngine() {
     if(themeToggle) themeToggle.onclick = toggleTheme;
     if(soundToggle) soundToggle.onclick = toggleSound;
 
-    // جلب الأسئلة فوراً عند تشغيل الصفحة
+    // تشغيل وإظهار لوحة الصدارة
+    if(viewLeaderboardBtn) viewLeaderboardBtn.onclick = openLeaderboard;
+    if(closeLeaderboardBtn) closeLeaderboardBtn.onclick = () => { if(leaderboardModal) leaderboardModal.style.display = 'none'; };
+    
+    if(tabPlayers) tabPlayers.onclick = () => switchLeaderboardTab('players');
+    if(tabCountries) tabCountries.onclick = () => switchLeaderboardTab('countries');
+
+    // جلب الأسئلة أونلاين فوراً عند فتح التطبيق
     loadOnlineQuestions();
 }
 
-// 🔥 الدالة المحدثة لكسر كاش جيت هاب نهائياً وقراءة التعديلات الحية فوراً
+// 🔥 1. جلب الأسئلة أونلاين مع تدمير الكاش نهائياً
 async function loadOnlineQuestions() {
     try {
-        // حيلة كسر الكاش: إضافة طابع زمني فريد لكل طلب فرعي نضمن بيه جلب الملف طازة من السيرفر
-        const uniqueUrl = `${githubRawUrl}?v=${Date.now()}`;
-        
-        const response = await fetch(uniqueUrl, { cache: "no-store" });
+        // حيلة كسر الكاش المزدوجة بالـ Headers والـ Timestamp المتغير بالملي ثانية
+        const forceFreshUrl = `${githubRawUrl}?cacheBust=${Date.now()}`;
+        const response = await fetch(forceFreshUrl, { 
+            method: 'GET',
+            headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' }
+        });
+
         if (response.ok) {
             const data = await response.json();
             let remoteQuestions = [];
@@ -101,32 +129,23 @@ async function loadOnlineQuestions() {
                 }
             });
             
-            if(remoteQuestions.length > 0) {
+            if(remoteQuestions.length > 6) {
                 gameState.allBankQuestions = [...remoteQuestions];
-                // سطر لفحص الأسئلة في الـ Console والتأكد من تحديثها
-                console.log("🔥 الأسئلة الحالية المجلوبة من جيت هاب بنجاح:", gameState.allBankQuestions);
+                console.log(`📡 تم تحديث وجلب الأسئلة الحية أونلاين: ${remoteQuestions.length} سؤال جاهز.`);
             }
         }
     } catch (e) { 
-        console.log("فشل جلب الأسئلة الحية، تم الاعتماد على الاحتياطي:", e);
+        console.log("حدث خطأ بالشبكة أو جيت هاب، تم تحويل الوضع للاحتياطي مؤقتاً.", e);
         gameState.allBankQuestions = [...backupQuestions];
     }
 }
 
 function startSpecificCategory(category) {
-    // تصفية الأسئلة للقسم المختار
     let categoryPool = gameState.allBankQuestions.filter(q => q.category === category);
-    
-    // إذا لم يجد أسئلة في هذا القسم، يعرض كل الأسئلة المتاحة كحماية
-    if(categoryPool.length === 0) {
-        categoryPool = [...gameState.allBankQuestions];
-    }
+    if(categoryPool.length === 0) categoryPool = [...gameState.allBankQuestions];
 
-    // ترتيب عشوائي واختيار أول 10 أسئلة حية كاملة
+    // جلب 10 أسئلة عشوائية كاملة للتحدي
     gameState.activeQuestions = shuffleArray([...categoryPool]).slice(0, 10);
-    
-    console.log(`🎯 القسم المختار: ${category} | عدد الأسئلة المتوفرة للتحدي: ${gameState.activeQuestions.length}`);
-
     gameState.score = 0;
     gameState.correctAnswersCount = 0;
     gameState.wrongAnswersCount = 0;
@@ -138,14 +157,12 @@ function startSpecificCategory(category) {
 
 function renderQuestion() {
     clearInterval(gameState.timer);
-    
     if (gameState.currentQuestionIndex >= gameState.activeQuestions.length) {
         endGameSession();
         return;
     }
 
     const currentQuestion = gameState.activeQuestions[gameState.currentQuestionIndex];
-    
     if(questionText) questionText.innerText = currentQuestion.question;
     if(questionCategory) {
         const arabicNames = { countries: "🌍 أعلام الدول", cars: "🚗 شعارات السيارات", monuments: "🏛️ معالم أثرية", general: "💡 معلومات عامة" };
@@ -162,11 +179,7 @@ function renderQuestion() {
     if(answersGrid) {
         answersGrid.innerHTML = "";
         let opts = currentQuestion.options && currentQuestion.options.length > 0 ? [...currentQuestion.options] : [currentQuestion.correctAnswer];
-        
-        if(opts.length < 4) {
-            opts = [currentQuestion.correctAnswer, "خيار إضافي ب", "خيار إضافي ج", "خيار إضافي د"];
-        }
-        
+        if(opts.length < 4) opts = [currentQuestion.correctAnswer, "خيار خطأ 1", "خيار خطأ 2", "خيار خطأ 3"];
         opts = shuffleArray([...opts]);
 
         opts.forEach(option => {
@@ -182,7 +195,6 @@ function renderQuestion() {
         const progressPercent = (gameState.currentQuestionIndex / gameState.activeQuestions.length) * 100;
         progressBar.style.width = `${progressPercent}%`;
     }
-
     startTimer();
 }
 
@@ -214,11 +226,9 @@ function checkPlayerAnswer(selectedButton, selectedValue, correctAnswer) {
 function startTimer() {
     gameState.timeLeft = 15;
     if(timerText) timerText.innerText = gameState.timeLeft;
-
     gameState.timer = setInterval(() => {
         gameState.timeLeft--;
         if(timerText) timerText.innerText = gameState.timeLeft;
-        
         if (gameState.timeLeft <= 0) {
             clearInterval(gameState.timer);
             gameState.wrongAnswersCount++;
@@ -228,17 +238,97 @@ function startTimer() {
     }, 1000);
 }
 
-function endGameSession() {
+// 🔥 2. إنهاء الجلسة وحفظ النتيجة في الفايربيز أونلاين وتحديث السجلات
+async function endGameSession() {
     switchScreen(resultScreen);
     playSound('victory');
     
     const resScore = document.getElementById('res-score');
     const resCorrect = document.getElementById('res-correct');
     const resWrong = document.getElementById('res-wrong');
-    
     if(resScore) resScore.innerText = gameState.score;
     if(resCorrect) resCorrect.innerText = gameState.correctAnswersCount;
     if(resWrong) resWrong.innerText = gameState.wrongAnswersCount;
+
+    // رفع السكور الحقيقي للفايربيز بـ اسم اللاعب ودولته
+    if (gameState.score > 0) {
+        try {
+            const userId = gameState.playerName + "_" + Math.floor(Math.random() * 10000);
+            await set(ref(db, 'leaderboard/players/' + userId), {
+                name: gameState.playerName,
+                country: gameState.playerCountry,
+                score: gameState.score,
+                timestamp: Date.now()
+            });
+
+            // تحديث نقاط الدول تراكمياً
+            const countryRef = ref(db, 'leaderboard/countries/' + gameState.playerCountry);
+            const countrySnap = await get(countryRef);
+            let currentCountryScore = 0;
+            if(countrySnap.exists()) currentCountryScore = countrySnap.val().score || 0;
+            await set(countryRef, { score: currentCountryScore + gameState.score });
+        } catch(e) { console.log("خطأ في رفع السكور للفايربيز:", e); }
+    }
+}
+
+// 🔥 3. تشغيل لوحة الصدارة أونلاين وجلب البيانات الحية وعرضها بالـ Modal
+function openLeaderboard() {
+    if(leaderboardModal) leaderboardModal.style.display = 'flex';
+    switchLeaderboardTab('players');
+}
+
+async function switchLeaderboardTab(type) {
+    if(type === 'players') {
+        if(tabPlayers) tabPlayers.classList.add('active');
+        if(tabCountries) tabCountries.classList.remove('active');
+        if(leaderboardList) leaderboardList.innerHTML = "<p style='color:#fff; text-align:center;'>جاري تحميل اللاعبين...</p>";
+        
+        try {
+            const playerSnap = await get(ref(db, 'leaderboard/players'));
+            if(playerSnap.exists()) {
+                let playersArray = [];
+                Object.keys(playerSnap.val()).forEach(key => { playersArray.push(playerSnap.val()[key]); });
+                // ترتيب تصاعدي حسب السكور ثم عكسه للحصول على الأعلى
+                playersArray.sort((a, b) => b.score - a.score);
+                
+                if(leaderboardList) {
+                    leaderboardList.innerHTML = "";
+                    playersArray.slice(0, 5).forEach((p, idx) => {
+                        const row = document.createElement('div');
+                        row.className = "stat-item";
+                        row.style.margin = "5px 0";
+                        row.innerHTML = `<span>#${idx+1} ${p.name} (${p.country})</span> <span style='font-weight:bold; color:#a855f7;'>⭐ ${p.score}</span>`;
+                        leaderboardList.appendChild(row);
+                    });
+                }
+            } else { if(leaderboardList) leaderboardList.innerHTML = "<p style='color:#aaa; text-align:center;'>لا يوجد لاعبين مسجلين بعد.</p>"; }
+        } catch(e) { if(leaderboardList) leaderboardList.innerHTML = "<p style='color:#ef4444; text-align:center;'>خطأ في الاتصال باللوحة</p>"; }
+
+    } else {
+        if(tabCountries) tabCountries.classList.add('active');
+        if(tabPlayers) tabPlayers.classList.remove('active');
+        if(leaderboardList) leaderboardList.innerHTML = "<p style='color:#fff; text-align:center;'>جاري تحميل ترتيب الدول...</p>";
+
+        try {
+            const countrySnap = await get(ref(db, 'leaderboard/countries'));
+            if(countrySnap.exists()) {
+                let countriesArray = [];
+                Object.keys(countrySnap.val()).forEach(key => { countriesArray.push({ name: key, score: countrySnap.val()[key].score }); });
+                countriesArray.sort((a, b) => b.score - a.score);
+
+                if(leaderboardList) {
+                    leaderboardList.innerHTML = "";
+                    countriesArray.slice(0, 5).forEach((c, idx) => {
+                        const row = document.createElement('div');
+                        row.className = "stat-item";
+                        row.style.margin = "5px 0";
+                        row.innerHTML = `<span>#${idx+1} ${c.name}</span> <span style='font-weight:bold; color:#10b981;'>⭐ ${c.score}</span>`;
+                        leaderboardList.appendChild(row);
+                    });
+                }
+            } else { if(leaderboardList) leaderboardList.innerHTML = "<p style='color:#aaa; text-align:center;'>لا توجد نتائج مسجلة للدول.</p>"; }
+        } catch(e) { if(leaderboardList) leaderboardList.innerHTML = "<p style='color:#ef4444; text-align:center;'>خطأ في جلب بيانات الدول</p>"; }
+    }
 }
 
 function switchScreen(targetScreen) {
