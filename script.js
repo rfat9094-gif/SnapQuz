@@ -102,7 +102,7 @@ async function loadOnlineQuestions() {
                 }
             });
             
-            if(remoteQuestions.length > 0) {
+            if(remoteQuestions.length > 6) {
                 gameState.allBankQuestions = [...remoteQuestions];
                 console.log(`📡 متصل بجيت هاب بنجاح! تم تحميل ${remoteQuestions.length} سؤال حي متجدد.`);
             }
